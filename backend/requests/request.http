@@ -1,28 +1,31 @@
-### Successful test: check response status is 200
+### Check response status is 200
 GET http://localhost:5000/api/users/profile
 Accept: application/json
-
-> {%
-client.test("Request executed successfully", function() {
-  client.assert(response.status === 200, "Response status is not 200");
-});
-%}
 
 ### Failed test: check response status is 200
 GET http://localhost:5000/api/users/profile/404
 
-> {%
-client.test("Request executed successfully", function() {
-  client.assert(response.status === 200, "Response status is not 200");
-});
-%}
-
-### Send POST request with body as parameters
+### Send POST request with body as parameters (Create user)
 POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-  "email": "mail@mail.com",
-  "password": "123456"
+  "email": "mail2@mail.com",
+  "password": "1234566"
 }
+
+### Get user profile with TOKEN
+GET http://localhost:5000/api/users/profile
+Accept: application/json
+Authorization: Bearer {{TOKEN}}
+
+### Send POST request with body as parameters (LOGIN)
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "mail2@mail.com",
+  "password": "1234566"
+}
+
 
